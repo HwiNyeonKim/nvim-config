@@ -34,4 +34,3 @@ local ok, _ = pcall(vim.cmd.colorscheme, "tokyonight-night")
 if not ok then
     pcall(vim.cmd.colorscheme, "habamax")
 end
-vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg = 1, bg = "#8B0000" })

@@ -15,7 +15,13 @@ return {
         "f-person/git-blame.nvim",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
-            message_template = "<summary> • <date> • <author> • <sha>",
+            message_template = "<author>, <date> — <summary> (<sha>)",
+            date_format = "%Y-%m-%d",
+            highlight_group = "GitBlameVirtText",
         },
+        config = function(_, opts)
+            vim.api.nvim_set_hl(0, "GitBlameVirtText", { fg = "#7aa2f7", italic = true })
+            require("gitblame").setup(opts)
+        end,
     },
 }
