@@ -20,4 +20,31 @@ return {
         "RRethy/vim-illuminate",
         event = { "BufReadPost", "BufNewFile" },
     },
+    -- Window picker
+    {
+        "s1n7ax/nvim-window-picker",
+        version = "2.*",
+        cmd = { "W" },
+        keys = {
+            { "<C-w>p", function()
+                local win = require("window-picker").pick_window()
+                if win then vim.api.nvim_set_current_win(win) end
+            end, desc = "Pick window" },
+        },
+        config = function()
+            require("window-picker").setup({
+                hint = "floating-big-letter",
+                filter_rules = {
+                    bo = {
+                        filetype = { "notify", "noice" },
+                        buftype = {},
+                    },
+                },
+            })
+            vim.api.nvim_create_user_command("W", function()
+                local win = require("window-picker").pick_window()
+                if win then vim.api.nvim_set_current_win(win) end
+            end, { desc = "Pick window to focus" })
+        end,
+    },
 }
