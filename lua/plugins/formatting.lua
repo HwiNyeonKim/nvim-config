@@ -6,7 +6,7 @@ return {
         cmd = { "ConformInfo" },
         opts = {
             formatters_by_ft = {
-                python = { "isort", "black" },
+                python = { "ruff_organize_imports", "ruff_format" },
                 lua = { "stylua" },
                 json = { "jq" },
             },

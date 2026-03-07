@@ -24,13 +24,9 @@ opt.hlsearch = true
 opt.ignorecase = true
 
 -- System
-opt.clipboard = "unnamed"
+opt.clipboard = "unnamedplus"
+opt.signcolumn = "yes"
 opt.history = 1000
 opt.laststatus = 2
 opt.mouse = "a"
 
--- Colorscheme (pcall: may not be available before plugins install)
-local ok, _ = pcall(vim.cmd.colorscheme, "tokyonight-night")
-if not ok then
-    pcall(vim.cmd.colorscheme, "habamax")
-end

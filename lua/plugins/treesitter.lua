@@ -5,8 +5,14 @@ return {
     config = function()
         require("nvim-treesitter").setup({})
 
-        -- Install parsers
-        require("nvim-treesitter").install({ "lua", "python", "vim", "json", "markdown" })
+        -- Install missing parsers (skips already installed)
+        local wanted = { "lua", "python", "vim", "json", "markdown" }
+        local missing = vim.tbl_filter(function(lang)
+            return not pcall(vim.treesitter.language.inspect, lang)
+        end, wanted)
+        if #missing > 0 then
+            require("nvim-treesitter").install(missing)
+        end
 
         -- Enable treesitter highlighting for supported filetypes
         vim.api.nvim_create_autocmd("FileType", {

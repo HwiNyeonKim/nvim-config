@@ -19,5 +19,18 @@ return {
         })
 
         vim.lsp.enable({ "pyright", "lua_ls" })
+
+        -- LSP keymaps (on attach only)
+        vim.api.nvim_create_autocmd("LspAttach", {
+            group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
+            callback = function(ev)
+                local opts = { buffer = ev.buf }
+                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+            end,
+        })
     end,
 }
