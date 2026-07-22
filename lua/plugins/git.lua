@@ -16,4 +16,14 @@ return {
         "tpope/vim-fugitive",
         cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit" },
     },
+    -- Scrollbar overview with git change + diagnostic markers on the right edge
+    {
+        "petertriho/nvim-scrollbar",
+        dependencies = { "lewis6991/gitsigns.nvim" },
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("scrollbar").setup()
+            require("scrollbar.handlers.gitsigns").setup()
+        end,
+    },
 }
