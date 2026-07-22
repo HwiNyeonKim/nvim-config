@@ -1,5 +1,9 @@
 local opt = vim.opt
 
+-- Leader (must be set before plugins/keymaps that use <leader>)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Appearance
 opt.cursorline = true
 opt.number = true

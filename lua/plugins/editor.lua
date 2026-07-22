@@ -5,6 +5,7 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         keys = {
             { "<C-p>", "<cmd>lua require('fzf-lua').files()<CR>", desc = "Find files" },
+            { "<leader>fg", "<cmd>lua require('fzf-lua').live_grep()<CR>", desc = "Live grep (search in files)" },
         },
         cmd = { "FzfLua" },
         opts = {},
