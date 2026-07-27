@@ -1,6 +1,10 @@
 return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "NvimTreeOpen", "NvimTreeToggle" },
+    keys = {
+        { "<C-n>", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
+    },
     config = function()
         require("nvim-tree").setup({
             filters = {
