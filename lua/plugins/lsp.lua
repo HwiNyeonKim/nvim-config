@@ -2,6 +2,12 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     config = function()
+        -- Show diagnostic text inline (Neovim defaults to underline + sign only)
+        vim.diagnostic.config({ virtual_text = true })
+
+        -- Popup menu even for a single match, and never auto-insert on autotrigger
+        vim.opt.completeopt = "menu,menuone,noselect,popup"
+
         -- Lua LSP: Neovim-aware settings
         vim.lsp.config("lua_ls", {
             settings = {
@@ -24,6 +30,8 @@ return {
         vim.api.nvim_create_autocmd("LspAttach", {
             group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),
             callback = function(ev)
+                vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
+
                 local opts = { buffer = ev.buf }
                 vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
