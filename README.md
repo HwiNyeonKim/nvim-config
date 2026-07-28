@@ -8,18 +8,29 @@ Neovim 0.11 이상. `vim.lsp.config` / `vim.lsp.enable` / `vim.lsp.completion`�
 
 ## 외부 의존성
 
-mason을 쓰지 않으므로 LSP 서버·포매터·린터는 모두 시스템 바이너리다. **없어도 에러가 나지 않고 조용히 동작만 안 하니** 새 머신에서는 먼저 설치한다.
+mason을 쓰지 않으므로 LSP 서버·포매터·린터는 모두 시스템 바이너리다. 새 머신에서는 먼저 설치한다.
 
 ```sh
-brew install neovim pyright lua-language-server ruff stylua jq fzf ripgrep
+brew install neovim tree-sitter-cli ruff stylua jq fzf ripgrep
+brew install pyright lua-language-server llvm jdtls \
+  typescript-language-server vscode-langservers-extracted \
+  bash-language-server gopls rust-analyzer
+brew install go rust
 ```
 
 | 바이너리 | 쓰는 곳 |
 |---|---|
-| `pyright`, `lua-language-server` | LSP (`lua/plugins/lsp.lua`) |
+| `pyright`, `lua-language-server` | LSP — Python, Lua (`lua/plugins/lsp.lua`) |
+| `llvm`(clangd), `jdtls` | LSP — C/C++, Java |
+| `typescript-language-server`, `vscode-langservers-extracted` | LSP — JS/TS, HTML/CSS/JSON/ESLint |
+| `bash-language-server`, `gopls`, `rust-analyzer` | LSP — Bash, Go, Rust |
+| `go`, `rust` | gopls·rust_analyzer가 `go`·`rustc`를 호출한다 |
+| `tree-sitter-cli` | treesitter 파서 빌드 |
 | `ruff` | Python 포맷·린트 (conform, nvim-lint) |
 | `stylua`, `jq` | Lua·JSON 포맷 (conform) |
 | `fzf` (0.36+), `ripgrep` | fzf-lua 파일 검색·live grep |
+
+clangd는 brew에 단독 formula가 없어 `llvm`에 들어 있다. Debian·Ubuntu라면 `apt install clangd`가 가볍다.
 
 패키지 매니저 밖:
 
