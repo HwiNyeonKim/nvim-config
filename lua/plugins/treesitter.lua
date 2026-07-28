@@ -7,7 +7,11 @@ return {
         require("nvim-treesitter").setup({})
 
         -- Install missing parsers (skips already installed)
-        local wanted = { "lua", "python", "vim", "json", "markdown" }
+        local wanted = {
+            "lua", "python", "vim", "json", "markdown",
+            "c", "cpp", "java", "bash", "go", "rust",
+            "javascript", "typescript", "tsx", "html", "css",
+        }
         local missing = vim.tbl_filter(function(lang)
             return not pcall(vim.treesitter.language.inspect, lang)
         end, wanted)

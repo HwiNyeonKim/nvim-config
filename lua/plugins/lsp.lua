@@ -24,7 +24,12 @@ return {
             },
         })
 
-        vim.lsp.enable({ "pyright", "lua_ls" })
+        vim.lsp.enable({
+            "pyright", "lua_ls",                            -- Python, Lua
+            "clangd", "jdtls",                              -- C/C++, Java
+            "ts_ls", "html", "cssls", "jsonls", "eslint",   -- JS/TS, HTML, CSS, JSON, ESLint
+            "bashls", "gopls", "rust_analyzer",             -- Bash, Go, Rust
+        })
 
         -- LSP keymaps (on attach only)
         vim.api.nvim_create_autocmd("LspAttach", {
