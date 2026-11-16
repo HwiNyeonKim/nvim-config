@@ -24,11 +24,11 @@ return {
             },
         })
 
-        vim.lsp.confog("pyright", {
+        vim.lsp.config("pyright", {
             before_init = function(_, config)
                 local venv_python = config.root_dir .. "/.venv/bin/python"
                 if vim.uv.fs_stat(venv_python) then
-                    config.settings.python = vim.tbl_extend("forcec", config.settings.python or {}, { pythonPath = venv_python })
+                    config.settings.python = vim.tbl_extend("force", config.settings.python or {}, { pythonPath = venv_python })
                 end
             end,
         })
