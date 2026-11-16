@@ -46,12 +46,14 @@ return {
             callback = function(ev)
                 vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { autotrigger = true })
 
-                local opts = { buffer = ev.buf }
-                vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-                vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-                vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-                vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-                vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+                local function map(lhs, rhs, desc)
+                    vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, desc = desc })
+                end
+                map("gd", vim.lsp.buf.definition, "LSP: Go to definition")
+                map("gi", vim.lsp.buf.implementation, "LSP: Go to implementation")
+                map("gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+                map("<leader>rn", vim.lsp.buf.rename, "LSP: Rename symbol")
+                map("<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
             end,
         })
     end,
